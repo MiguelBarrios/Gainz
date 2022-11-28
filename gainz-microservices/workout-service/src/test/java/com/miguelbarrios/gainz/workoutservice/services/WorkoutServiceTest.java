@@ -36,7 +36,6 @@ class WorkoutServiceTest {
     @Test
     void deleteWorkout() {
         assertTrue(false);
-
     }
 
     @Test

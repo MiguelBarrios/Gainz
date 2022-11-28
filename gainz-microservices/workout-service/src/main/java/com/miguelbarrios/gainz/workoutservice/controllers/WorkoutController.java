@@ -1,9 +1,7 @@
 package com.miguelbarrios.gainz.workoutservice.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.miguelbarrios.gainz.workoutservice.models.Workout;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/workout")
@@ -12,14 +10,28 @@ public class WorkoutController {
     public static final int testUserId = 1;
 
     @PostMapping
-    public void createWorkout(){
-
+    public Workout createWorkout(){
+        return null;
     }
 
-    @PostMapping("/addset")
-    public void addExerciseSetToWorkout(){
-
+    @GetMapping("/{workoutId}")
+    public Workout getWorkoutById(@PathVariable Integer id){
+        return null;
     }
+
+    @PutMapping("/{workoutId}")
+    public Workout updateWorkout(@RequestBody Workout workout){
+        return null;
+    }
+    @DeleteMapping("/{workoutId}")
+    public void deleteWorkoutById(@PathVariable Integer workoutId){
+        
+    }
+
+
+
+
+
 
 
 }
