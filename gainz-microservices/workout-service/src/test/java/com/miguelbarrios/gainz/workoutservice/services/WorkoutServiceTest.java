@@ -131,8 +131,14 @@ class WorkoutServiceTest {
     			.userId(userId)
     			.build();
     	
+    	Workout workout3 = Workout.builder()
+    			.startTime(LocalDateTime.now())
+    			.userId(userId + 1)
+    			.build();
+    	
     	workoutRepository.save(workout1);
     	workoutRepository.save(workout2);
+    	workoutRepository.save(workout3);
     	
     	List<Workout> userWorkouts = workoutService.getUserWorkouts(userId);
     	assertNotNull(userWorkouts);

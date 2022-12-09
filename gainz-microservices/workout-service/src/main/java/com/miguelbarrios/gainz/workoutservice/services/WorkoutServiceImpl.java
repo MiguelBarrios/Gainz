@@ -52,6 +52,6 @@ public class WorkoutServiceImpl implements WorkoutService{
 
     @Override
     public List<Workout> getUserWorkouts(int userId) {
-        return null;
+    	return workoutRepository.findAllByUserId(userId);
     }
 }
