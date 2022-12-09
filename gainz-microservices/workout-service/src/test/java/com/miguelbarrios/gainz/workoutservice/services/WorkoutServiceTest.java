@@ -95,6 +95,7 @@ class WorkoutServiceTest {
     	Assert.fail("User should not be able to access workout");
     }
     
+    @Test
     void should_throw_not_found_exception_for_invalid_workout_id() {
     	try {
     		Workout workout = workoutService.getWorkout(userId, 12);

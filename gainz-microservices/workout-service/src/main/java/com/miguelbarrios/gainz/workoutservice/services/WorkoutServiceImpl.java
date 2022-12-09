@@ -1,6 +1,5 @@
 package com.miguelbarrios.gainz.workoutservice.services;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,6 +8,8 @@ import com.miguelbarrios.gainz.workoutservice.repositories.WorkoutRepository;
 
 import org.springframework.stereotype.Service;
 
+import exceptions.UnauthorizedException;
+import exceptions.WorkoutNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -29,9 +30,14 @@ public class WorkoutServiceImpl implements WorkoutService{
 
     @Override
     public Workout getWorkout(int userId, int workoutId) {
+    	Workout workout = workoutRepository.findById(workoutId).orElseThrow(
+    			() -> new WorkoutNotFoundException());
+
+    	if(workout.getUserId() != userId) {
+    		throw new UnauthorizedException();
+    	}
     	
-    	
-        return null;
+        return workout;
     }
 
     @Override
