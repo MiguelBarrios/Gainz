@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import com.miguelbarrios.gainz.workoutservice.models.Workout;
 import com.miguelbarrios.gainz.workoutservice.repositories.WorkoutRepository;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import exceptions.UnauthorizedException;
+import exceptions.WorkoutNotFoundException;
 
 @RunWith( SpringRunner.class )
 @SpringBootTest
@@ -90,7 +92,19 @@ class WorkoutServiceTest {
     		return;
     	}
     	 	  
-    	assertTrue(false);
+    	Assert.fail("User should not be able to access workout");
+    }
+    
+    void should_throw_not_found_exception_for_invalid_workout_id() {
+    	try {
+    		Workout workout = workoutService.getWorkout(userId, 12);
+    		assertNull(workout);
+    	}
+    	catch(WorkoutNotFoundException e) {
+    		return;
+    	}
+    	
+    	Assert.fail("Should not return workout");
     }
 
     @Test
