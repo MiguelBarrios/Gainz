@@ -1,21 +1,27 @@
 package com.miguelbarrios.gainz.workoutservice.services;
 
 import com.miguelbarrios.gainz.workoutservice.models.Workout;
+import org.hibernate.jdbc.Work;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class WorkoutServiceImpl implements WorkoutService{
+	
     @Override
-    public void createWorkout(int userId, Workout workout) {
-
+    public Workout createWorkout(int userId, Workout workout) {
+        return null;
     }
 
     @Override
-    public void getWorkout(int userId, int workoutId) {
-
+    public Workout getWorkout(int userId, int workoutId) {
+        return null;
     }
 
     @Override
-    public void updateWorkout(int userId, Workout workout) {
-
+    public Workout updateWorkout(int userId, Workout workout) {
+        return null;
     }
 
     @Override
@@ -24,7 +30,7 @@ public class WorkoutServiceImpl implements WorkoutService{
     }
 
     @Override
-    public void getUserWorkouts(int userId) {
-
+    public List<Workout> getUserWorkouts(int userId) {
+        return null;
     }
 }

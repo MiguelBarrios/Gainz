@@ -25,7 +25,7 @@ public class WorkoutController {
     }
     @DeleteMapping("/{workoutId}")
     public void deleteWorkoutById(@PathVariable Integer workoutId){
-        
+
     }
 
 
