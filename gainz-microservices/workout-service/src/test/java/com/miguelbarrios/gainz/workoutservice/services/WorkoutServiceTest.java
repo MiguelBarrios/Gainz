@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.miguelbarrios.gainz.workoutservice.models.Workout;
 import com.miguelbarrios.gainz.workoutservice.repositories.WorkoutRepository;
@@ -120,8 +121,29 @@ class WorkoutServiceTest {
     }
 
     @Test
-    void getUserWorkouts() {
-        assertTrue(false);
+    void should_get_user_workouts() {
+    	Workout workout1 = Workout.builder()
+    			.id(1)
+    			.startTime(LocalDateTime.now())
+    			.userId(userId)
+    			.build();
+    	Workout workout2 = Workout.builder()
+    			.id(1)
+    			.startTime(LocalDateTime.now())
+    			.userId(userId)
+    			.build();
+    	
+    	workoutRepository.save(workout1);
+    	workoutRepository.save(workout2);
+    	
+    	List<Workout> userWorkouts = workoutService.getUserWorkouts(userId);
+    	assertNotNull(userWorkouts);
+    	assertTrue(userWorkouts.size() == 2);
+    	for(Workout workout : userWorkouts) {
+    		assertTrue(workout.getUserId() == userId);
+    	}
+    	
+    	
 
     }
 }
