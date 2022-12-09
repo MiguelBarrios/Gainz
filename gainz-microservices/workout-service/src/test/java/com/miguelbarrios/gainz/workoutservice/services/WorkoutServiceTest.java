@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
+import com.miguelbarrios.gainz.workoutservice.models.ExerciseGroup;
 import com.miguelbarrios.gainz.workoutservice.models.Workout;
 import com.miguelbarrios.gainz.workoutservice.repositories.WorkoutRepository;
 
@@ -34,15 +36,21 @@ class WorkoutServiceTest {
     private WorkoutRepository workoutRepository;
 
     @Autowired
-    private WorkoutService workoutService;
-
-    private Workout workout;
+    private WorkoutService workoutService;    
+    
+    private static Integer workoutId = 1;
 
     private static Integer userId = 1;
     
 
     @BeforeEach
     void setUp() {
+    	Workout workout1 = Workout.builder()
+    			.id(1)
+    			.startTime(LocalDateTime.now())
+    			.userId(userId)
+    			.build();
+    	workoutRepository.save(workout1);
     }
 
     @AfterEach
@@ -63,15 +71,7 @@ class WorkoutServiceTest {
     }
 
     @Test
-    void should_get_workout_if_owned_by_user() {	
-    	
-    	Workout workout = Workout.builder()
-    			.id(1)
-    			.startTime(LocalDateTime.now())
-    			.userId(userId)
-    			.build();
-    	workout = workoutRepository.save(workout);
-    	
+    void should_get_workout_if_owned_by_user() {	    	
     	Workout actual = workoutService.getWorkout(userId, workout.getId());
     	assertNotNull(actual);
     	assertEquals(userId, actual.getUserId());
@@ -79,15 +79,9 @@ class WorkoutServiceTest {
     
     @Test
     void should_throw_unauthorized_exception_if_workout_does_not_belong_to_user() {
-    	Workout workout = Workout.builder()
-    			.id(1)
-    			.startTime(LocalDateTime.now())
-    			.userId(userId)
-    			.build();
-    	workout = workoutRepository.save(workout);
     	
     	try {
-        	Workout actual = workoutService.getWorkout(userId + 1, workout.getId());
+        	Workout actual = workoutService.getWorkout(userId + 1, 1);
         	assertNull(actual);
     	} catch (UnauthorizedException e) {
     		return;
@@ -110,9 +104,19 @@ class WorkoutServiceTest {
     }
 
     @Test
-    void updateWorkout() {
-        assertTrue(false);
-
+    void should_update_workout() {
+    	
+    	Optional<Workout> option = workoutRepository.findById(workoutId);
+    	if(option.isEmpty()) {
+    		Assert.fail("Should not be empty");
+    	}
+    	
+    	Workout workout = option.get();
+    	
+    	
+    	
+    	
+ 
     }
 
     @Test

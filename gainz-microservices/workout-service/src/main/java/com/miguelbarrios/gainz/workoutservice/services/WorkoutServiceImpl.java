@@ -3,6 +3,8 @@ package com.miguelbarrios.gainz.workoutservice.services;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.miguelbarrios.gainz.workoutservice.models.Workout;
 import com.miguelbarrios.gainz.workoutservice.repositories.WorkoutRepository;
 
@@ -14,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class WorkoutServiceImpl implements WorkoutService{
 	
 	private final WorkoutRepository workoutRepository;
@@ -42,6 +45,7 @@ public class WorkoutServiceImpl implements WorkoutService{
 
     @Override
     public Workout updateWorkout(int userId, Workout workout) {
+    	
         return null;
     }
 
