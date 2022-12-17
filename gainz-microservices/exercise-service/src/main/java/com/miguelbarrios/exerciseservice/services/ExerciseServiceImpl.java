@@ -1,10 +1,13 @@
 package com.miguelbarrios.exerciseservice.services;
 
+import java.util.List;
+
 import com.miguelbarrios.exerciseservice.models.Exercise;
 import com.miguelbarrios.exerciseservice.models.Muscle;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ExerciseServiceImpl implements ExerciseService{
     @Override
     public Exercise createExercise() {
@@ -32,17 +35,13 @@ public class ExerciseServiceImpl implements ExerciseService{
     }
 
     @Override
-    public Muscle addMuscleGroup() {
-        return null;
-    }
-
-    @Override
-    public Muscle removeMuscleGroup(Muscle muscle) {
-        return null;
-    }
-
-    @Override
     public List<Exercise> getAllCustomExercises() {
         return null;
     }
+
+	@Override
+	public List<Muscle> getAllMuscles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
