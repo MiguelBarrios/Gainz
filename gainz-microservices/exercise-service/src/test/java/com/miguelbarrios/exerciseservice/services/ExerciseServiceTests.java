@@ -2,11 +2,12 @@ package com.miguelbarrios.exerciseservice.services;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import com.miguelbarrios.exerciseservice.models.Exercise;
 import com.miguelbarrios.exerciseservice.models.MuscleGroup;
+import com.miguelbarrios.exerciseservice.repositories.ExerciseRepository;
 import com.miguelbarrios.exerciseservice.repositories.MuscleGroupRepository;
 
 import org.junit.jupiter.api.AfterAll;
@@ -29,9 +30,13 @@ class ExerciseServiceTests {
 	@Autowired
 	private MuscleGroupRepository mgRepository;
 	
+	@Autowired
+	private ExerciseRepository exerciseRepository;
 	
 	@Autowired
 	private ExerciseServiceImpl exerciseService;
+	
+	private static int userId = 1;
 	
 
 	@BeforeAll
@@ -50,6 +55,30 @@ class ExerciseServiceTests {
 
 	@AfterEach
 	void tearDown() throws Exception {
+	}
+	
+	@Test
+	void exercise_entity_mapping_test() {
+		
+	}
+	
+	@Test
+	void should_create_global_exercise() {
+		Exercise exercise = Exercise.builder()
+				.name("Bench Press")
+				.isCustomExercise(false)
+				.build();
+		
+		MuscleGroup a = new MuscleGroup("Chest");
+		MuscleGroup b = new MuscleGroup("Shoulders");
+		
+		
+		Exercise managedExercise = exerciseService.createExercise(exercise);
+		
+		assertNotNull(exercise);
+		assertTrue(managedExercise.getId() > 0);
+		assertTrue(managedExercise.getName().equals("Bench Press"));
+		
 	}
 
 	@Test
