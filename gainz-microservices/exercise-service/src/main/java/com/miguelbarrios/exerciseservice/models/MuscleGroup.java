@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="target_muscle")
-public class Muscle {
+public class MuscleGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +16,9 @@ public class Muscle {
 
     private String name;
 
-    public Muscle(){}
+    public MuscleGroup(){}
     
-    public Muscle(String name) {
+    public MuscleGroup(String name) {
     	this.name = name;
     }
 

@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import com.miguelbarrios.exerciseservice.models.Muscle;
-import com.miguelbarrios.exerciseservice.repositories.MuscleRepository;
+import com.miguelbarrios.exerciseservice.models.MuscleGroup;
+import com.miguelbarrios.exerciseservice.repositories.MuscleGroupRepository;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -27,7 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 class ExerciseServiceTests {
 	
 	@Autowired
-	private MuscleRepository muscleRepository;
+	private MuscleGroupRepository mgRepository;
 	
 	
 	@Autowired
@@ -54,12 +54,12 @@ class ExerciseServiceTests {
 
 	@Test
 	void should_return_all_muscle_groups() {
-		muscleRepository.save(new Muscle("Back"));
-		muscleRepository.save(new Muscle("Chest"));
-		muscleRepository.save(new Muscle("Quads"));
-		muscleRepository.save(new Muscle("Shoulders"));
+		mgRepository.save(new MuscleGroup("Back"));
+		mgRepository.save(new MuscleGroup("Chest"));
+		mgRepository.save(new MuscleGroup("Quads"));
+		mgRepository.save(new MuscleGroup("Shoulders"));
 		
-		List<Muscle> muscles = exerciseService.getAllMuscleGroups();
+		List<MuscleGroup> muscles = exerciseService.getAllMuscleGroups();
 		assertNotNull(muscles.size() >= 4);
 	}
 

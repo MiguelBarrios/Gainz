@@ -3,7 +3,7 @@ package com.miguelbarrios.exerciseservice.services;
 import java.util.List;
 
 import com.miguelbarrios.exerciseservice.models.Exercise;
-import com.miguelbarrios.exerciseservice.models.Muscle;
+import com.miguelbarrios.exerciseservice.models.MuscleGroup;
 
 public interface ExerciseService {
 	Exercise createExercise();
@@ -11,8 +11,8 @@ public interface ExerciseService {
 	
 	List<Exercise> getExercise();
 	List<Exercise> getUserExercises(int userId);
-	List<Muscle> getTargetedMuscles(Exercise exercise);
-	List<Muscle> getAllMuscleGroups();
+	List<MuscleGroup> getTargetedMuscles(Exercise exercise);
+	List<MuscleGroup> getAllMuscleGroups();
 
 	//Admin methods
 	List<Exercise> getAllCustomExercises();

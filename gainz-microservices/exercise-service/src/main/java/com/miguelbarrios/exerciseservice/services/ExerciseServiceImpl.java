@@ -3,8 +3,8 @@ package com.miguelbarrios.exerciseservice.services;
 import java.util.List;
 
 import com.miguelbarrios.exerciseservice.models.Exercise;
-import com.miguelbarrios.exerciseservice.models.Muscle;
-import com.miguelbarrios.exerciseservice.repositories.MuscleRepository;
+import com.miguelbarrios.exerciseservice.models.MuscleGroup;
+import com.miguelbarrios.exerciseservice.repositories.MuscleGroupRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 public class ExerciseServiceImpl implements ExerciseService{
 	
 	
-	private MuscleRepository muscleRepository;
+	private MuscleGroupRepository muscleRepository;
 	
-	public ExerciseServiceImpl(MuscleRepository muscleRepository) {
+	public ExerciseServiceImpl(MuscleGroupRepository muscleRepository) {
 		this.muscleRepository = muscleRepository;
 	}
 	
@@ -40,7 +40,7 @@ public class ExerciseServiceImpl implements ExerciseService{
     }
 
     @Override
-    public List<Muscle> getTargetedMuscles(Exercise exercise) {
+    public List<MuscleGroup> getTargetedMuscles(Exercise exercise) {
         return null;
     }
 
@@ -50,7 +50,7 @@ public class ExerciseServiceImpl implements ExerciseService{
     }
 
 	@Override
-	public List<Muscle> getAllMuscleGroups() {
+	public List<MuscleGroup> getAllMuscleGroups() {
 		return muscleRepository.findAll();
 	}
 }
