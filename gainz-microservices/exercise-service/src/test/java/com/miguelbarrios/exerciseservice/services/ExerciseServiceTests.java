@@ -1,7 +1,9 @@
 package com.miguelbarrios.exerciseservice.services;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.miguelbarrios.exerciseservice.models.Muscle;
@@ -32,6 +34,14 @@ class ExerciseServiceTests {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
+		List<Muscle> muscleGroups = new ArrayList<>();
+		muscleGroups.add(new Muscle("Back"));
+		muscleGroups.add(new Muscle("Chest"));
+		muscleGroups.add(new Muscle("Shoulders"));
+		muscleGroups.add(new Muscle("Legs"));
+		muscleRepository.saveAll(muscleGroups);
+		
+		
 	}
 
 	@BeforeAll
@@ -53,9 +63,10 @@ class ExerciseServiceTests {
 	}
 
 	@Test
-	void test() {
+	void should_return_all_muscle_groups() {
 		List<Muscle> muscles = exerciseService.getAllMuscles();
 		assertNotNull(muscles);
+		assertEquals(4,muscles.size());
 	}
 
 }
