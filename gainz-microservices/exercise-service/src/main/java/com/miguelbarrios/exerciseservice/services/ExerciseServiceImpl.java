@@ -4,11 +4,21 @@ import java.util.List;
 
 import com.miguelbarrios.exerciseservice.models.Exercise;
 import com.miguelbarrios.exerciseservice.models.Muscle;
+import com.miguelbarrios.exerciseservice.repositories.MuscleRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ExerciseServiceImpl implements ExerciseService{
+	
+	
+	private MuscleRepository muscleRepository;
+	
+	public ExerciseServiceImpl(MuscleRepository muscleRepository) {
+		this.muscleRepository = muscleRepository;
+	}
+	
     @Override
     public Exercise createExercise() {
         return null;
@@ -41,7 +51,6 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 	@Override
 	public List<Muscle> getAllMuscles() {
-		// TODO Auto-generated method stub
-		return null;
+		return muscleRepository.findAll();
 	}
 }
