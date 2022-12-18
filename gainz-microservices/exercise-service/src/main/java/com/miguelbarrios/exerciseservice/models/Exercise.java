@@ -68,6 +68,8 @@ public class Exercise {
 			muscleGroup.removeExercise(this);
 		}
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -84,6 +86,46 @@ public class Exercise {
 			return false;
 		Exercise other = (Exercise) obj;
 		return id == other.id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isCustomExercise() {
+		return isCustomExercise;
+	}
+
+	public void setCustomExercise(boolean isCustomExercise) {
+		this.isCustomExercise = isCustomExercise;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public Set<MuscleGroup> getTargetedMuscles() {
+		return targetedMuscles;
+	}
+
+	public void setTargetedMuscles(Set<MuscleGroup> targetedMuscles) {
+		this.targetedMuscles = targetedMuscles;
 	}
 	
 	

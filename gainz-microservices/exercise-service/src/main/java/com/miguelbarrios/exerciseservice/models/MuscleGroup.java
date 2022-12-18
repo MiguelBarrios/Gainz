@@ -65,7 +65,6 @@ public class MuscleGroup {
     }
     
     
-
     @Override
 	public int hashCode() {
 		return Objects.hash(id);

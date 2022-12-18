@@ -19,12 +19,6 @@ public class ExerciseServiceImpl implements ExerciseService{
 		this.muscleRepository = muscleRepository;
 	}
 	
-	@Override
-	public Exercise createExercise(Exercise exercise, int userId) {
-		return null;
-	}
-	
-
 
     @Override
     public boolean deleteExercise() {
@@ -57,13 +51,20 @@ public class ExerciseServiceImpl implements ExerciseService{
 	}
 
 
-
-
-
-
-
 	@Override
 	public Exercise getExerciseById() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Exercise createExercise(Exercise exercise) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Exercise createCustomExercise(Exercise exercise, int userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
