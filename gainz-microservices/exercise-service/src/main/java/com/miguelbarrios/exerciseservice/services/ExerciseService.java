@@ -12,9 +12,11 @@ public interface ExerciseService {
 	List<Exercise> getExercise();
 	List<Exercise> getUserExercises(int userId);
 	List<Muscle> getTargetedMuscles(Exercise exercise);
-	List<Muscle> getAllMuscles();
+	List<Muscle> getAllMuscleGroups();
 
 	//Admin methods
 	List<Exercise> getAllCustomExercises();
+	
+	
 
 }

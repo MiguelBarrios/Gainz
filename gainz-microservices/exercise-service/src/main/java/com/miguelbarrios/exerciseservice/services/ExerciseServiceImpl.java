@@ -50,7 +50,7 @@ public class ExerciseServiceImpl implements ExerciseService{
     }
 
 	@Override
-	public List<Muscle> getAllMuscles() {
+	public List<Muscle> getAllMuscleGroups() {
 		return muscleRepository.findAll();
 	}
 }

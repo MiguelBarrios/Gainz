@@ -9,5 +9,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 public class WorkoutServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(WorkoutServiceApplication.class, args);
+        
+        
     }
+    
+    
 }

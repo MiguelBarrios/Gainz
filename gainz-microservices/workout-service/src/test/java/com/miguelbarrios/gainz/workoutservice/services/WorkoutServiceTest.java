@@ -72,7 +72,7 @@ class WorkoutServiceTest {
 
     @Test
     void should_get_workout_if_owned_by_user() {	    	
-    	Workout actual = workoutService.getWorkout(userId, workout.getId());
+    	Workout actual = workoutService.getWorkout(userId, 1);
     	assertNotNull(actual);
     	assertEquals(userId, actual.getUserId());
     }

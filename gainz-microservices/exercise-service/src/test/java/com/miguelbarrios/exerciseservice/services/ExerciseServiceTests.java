@@ -1,51 +1,42 @@
 package com.miguelbarrios.exerciseservice.services;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.miguelbarrios.exerciseservice.models.Muscle;
 import com.miguelbarrios.exerciseservice.repositories.MuscleRepository;
 
-import org.junit.Before;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@ExtendWith(MockitoExtension.class)
+@RunWith( SpringRunner.class )
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
 class ExerciseServiceTests {
 	
-	@Mock
+	@Autowired
 	private MuscleRepository muscleRepository;
 	
-	@InjectMocks
+	
+	@Autowired
 	private ExerciseServiceImpl exerciseService;
 	
-	@Before
-	public void setup() {
-		MockitoAnnotations.initMocks(this);
-		List<Muscle> muscleGroups = new ArrayList<>();
-		muscleGroups.add(new Muscle("Back"));
-		muscleGroups.add(new Muscle("Chest"));
-		muscleGroups.add(new Muscle("Shoulders"));
-		muscleGroups.add(new Muscle("Legs"));
-		muscleRepository.saveAll(muscleGroups);
-		
-		
-	}
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+
 	}
 
 	@AfterAll
@@ -54,8 +45,7 @@ class ExerciseServiceTests {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		muscleRepository = Mockito.mock(MuscleRepository.class);
-		exerciseService = new ExerciseServiceImpl(muscleRepository);
+
 	}
 
 	@AfterEach
@@ -64,9 +54,13 @@ class ExerciseServiceTests {
 
 	@Test
 	void should_return_all_muscle_groups() {
-		List<Muscle> muscles = exerciseService.getAllMuscles();
-		assertNotNull(muscles);
-		assertEquals(4,muscles.size());
+		muscleRepository.save(new Muscle("Back"));
+		muscleRepository.save(new Muscle("Chest"));
+		muscleRepository.save(new Muscle("Quads"));
+		muscleRepository.save(new Muscle("Shoulders"));
+		
+		List<Muscle> muscles = exerciseService.getAllMuscleGroups();
+		assertNotNull(muscles.size() >= 4);
 	}
 
 }
