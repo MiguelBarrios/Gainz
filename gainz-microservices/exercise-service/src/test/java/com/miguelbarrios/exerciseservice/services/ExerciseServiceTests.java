@@ -29,9 +29,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 class ExerciseServiceTests {
 	
 	@Autowired
-	private MuscleGroupRepository mgRepository;
-	
-	@Autowired
 	private ExerciseRepository exerciseRepository;
 	
 	@Autowired
@@ -51,7 +48,6 @@ class ExerciseServiceTests {
 
 	@BeforeEach
 	void setUp() throws Exception {
-
 	}
 
 	@AfterEach
@@ -70,12 +66,6 @@ class ExerciseServiceTests {
 				.isCustomExercise(false)
 				.build();
 		
-		MuscleGroup a = new MuscleGroup("Chest");
-		MuscleGroup b = new MuscleGroup("Shoulders");
-		exercise.addMuscleGroup(a);
-		exercise.addMuscleGroup(b);
-		
-		
 		Exercise managedExercise = exerciseService.createExercise(exercise);
 		
 		assertNotNull(managedExercise);
@@ -85,32 +75,29 @@ class ExerciseServiceTests {
 		
 	}
 	
-	@Test
-	void should_create_custom_exercise() {
-		Exercise exercise = Exercise.builder()
-				.name("Kettle bell fly's").build();
-		
-		MuscleGroup a = new MuscleGroup("Chest");
-		MuscleGroup b = new MuscleGroup("Abs");
-		
-		Exercise managedExercise = exerciseService.createCustomExercise(exercise, userId);
-		
-		assertNotNull(managedExercise);
-		assertTrue(managedExercise.getId() > 0);
-		assertEquals(userId, managedExercise.getUserId());
-		assertTrue(managedExercise.getName().equals("Kettle bell fly's"));
-		assertTrue(managedExercise.isCustomExercise());
-		assertEquals(2, managedExercise.getTargetedMuscles().size());
+//	@Test
+//	void should_create_custom_exercise() {
+//		Exercise exercise = Exercise.builder()
+//				.name("Kettle bell fly's").build();
+//		
+//		MuscleGroup a = new MuscleGroup(1,"Back");
+//		MuscleGroup b = new MuscleGroup(2,"Chest");
+//		exercise.addMuscleGroup(a);
+//		exercise.addMuscleGroup(b);
+//		
+//		Exercise managedExercise = exerciseService.createCustomExercise(exercise, userId);
+//		
+//		assertNotNull(managedExercise);
+//		assertTrue(managedExercise.getId() > 0);
+//		assertEquals(userId, managedExercise.getUserId());
+//		assertTrue(managedExercise.getName().equals("Kettle bell fly's"));
+//		assertTrue(managedExercise.isCustomExercise());
+//		assertEquals(2, managedExercise.getTargetedMuscles().size());
+//
+//	}
 
-	}
-
 	@Test
-	void should_return_all_muscle_groups() {
-		mgRepository.save(new MuscleGroup("Back"));
-		mgRepository.save(new MuscleGroup("Chest"));
-		mgRepository.save(new MuscleGroup("Quads"));
-		mgRepository.save(new MuscleGroup("Shoulders"));
-		
+	void should_return_all_muscle_groups() {		
 		List<MuscleGroup> muscles = exerciseService.getAllMuscleGroups();
 		assertNotNull(muscles.size() >= 4);
 	}

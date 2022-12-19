@@ -9,10 +9,9 @@ public interface ExerciseService {
 	Exercise createExercise(Exercise exercise);
 	Exercise createCustomExercise(Exercise exercise, int userId);
 	Exercise getExerciseById();
-	boolean deleteExercise();
+	boolean deleteExercise(int exerciseId, int userId);
 	List<Exercise> getExercise();
-	List<Exercise> getUserExercises(int userId);
-	List<MuscleGroup> getTargetedMuscles(Exercise exercise);
-	List<MuscleGroup> getAllMuscleGroups();
-	List<Exercise> getAllCustomExercises();
+	List<Exercise> getAllCustomExercises();	
+	List<Exercise> getExercisesCreatedbyUser(int userId);
+	void removeAllCustomExercisesCreatedByUser(int userid);
 }

@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +17,6 @@ import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 
 @Builder
 @AllArgsConstructor
@@ -24,7 +25,7 @@ public class Exercise {
 
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
 	
 	private String name;
@@ -34,41 +35,15 @@ public class Exercise {
 	
 	
 	@Column(name="user_id")
-	private int userId;
-	
-	@ManyToMany
-	@JoinTable(
-			name="exercise_has_target_muscle",
-			joinColumns=@JoinColumn(name="exercise_id"),
-			inverseJoinColumns=@JoinColumn(name="target_muscle")
-			
-	)
-	private Set<MuscleGroup> targetedMuscles;
+	private Integer userId;
+
+	@Column(name="target_muscle")
+	private Set<String> targetedMuscles;
 	
 	
 	public Exercise() {
 		
 	}
-	
-	public void addMuscleGroup(MuscleGroup muscleGroup) {
-		if(targetedMuscles == null) {
-			targetedMuscles = new HashSet<>();
-		}
-		
-		if(!targetedMuscles.contains(muscleGroup)) {
-			targetedMuscles.add(muscleGroup);
-			muscleGroup.addExercise(this);
-			
-		}
-	}
-	
-	public void removeMuscleGroup(MuscleGroup muscleGroup) {
-		if(targetedMuscles != null && targetedMuscles.contains(muscleGroup)) {
-			targetedMuscles.remove(muscleGroup);
-			muscleGroup.removeExercise(this);
-		}
-	}
-	
 	
 
 	@Override
@@ -88,11 +63,11 @@ public class Exercise {
 		return id == other.id;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -116,17 +91,21 @@ public class Exercise {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
-	public Set<MuscleGroup> getTargetedMuscles() {
-		return targetedMuscles;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setTargetedMuscles(Set<MuscleGroup> targetedMuscles) {
-		this.targetedMuscles = targetedMuscles;
+
+	@Override
+	public String toString() {
+		return "Exercise [id=" + id + ", name=" + name + ", isCustomExercise=" + isCustomExercise + ", userId=" + userId
+				+ ", targetedMuscles=" + targetedMuscles + "]";
 	}
+
 	
 	
 	
