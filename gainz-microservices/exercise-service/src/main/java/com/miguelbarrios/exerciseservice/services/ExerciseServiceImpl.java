@@ -17,6 +17,7 @@ public class ExerciseServiceImpl implements ExerciseService{
 	
 	@Autowired
 	private ExerciseRepository exerciseRepository;
+	
 
 	@Override
 	public Exercise createExercise(Exercise exercise) {
@@ -56,7 +57,12 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 	@Override
 	public List<Exercise> getExercisesCreatedbyUser(int userId) {
-		// TODO Auto-generated method stub
+		Exercise a = Exercise.builder()
+				.name("Bench Press")
+				.isCustomExercise(true)
+				.userId(1).build();
+	
+		
 		return null;
 	}
 

@@ -1,10 +1,13 @@
 package com.miguelbarrios.exerciseservice.services;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.miguelbarrios.exerciseservice.exceptions.ExerciseNotFoundException;
@@ -35,6 +38,8 @@ class ExerciseServiceTests {
 	private ExerciseServiceImpl exerciseService;
 	
 	private static int userId = 1;
+	
+	private static int userId2 = 2;
 	
 
 	@BeforeAll
@@ -77,6 +82,20 @@ class ExerciseServiceTests {
 		}
 		
 		fail("Exercise returned with invalid id");
+	}
+	
+	@Test
+	void should_get_all_exercises() {
+		List<Exercise> exercises = new ArrayList<>();
+		exercises.add(new Exercise("Bench Press", false, null, null));
+		exercises.add(new Exercise("Shoulder Press", false, null, null));
+		exercises.add(new Exercise("Lat Pull", false, null, null));
+		exercises.add(new Exercise("Squat", false, userId, null));
+		exercises.add(new Exercise("DeadLift", false, userId, null));
+		
+		List<Exercise> actual = exerciseService.getExercise();
+		assertNotNull(actual);
+		assertTrue(actual.size() > 0);
 	}
 	
 	

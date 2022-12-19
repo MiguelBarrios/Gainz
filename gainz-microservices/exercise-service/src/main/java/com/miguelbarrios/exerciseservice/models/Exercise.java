@@ -40,6 +40,17 @@ public class Exercise {
 	public Exercise() {
 		
 	}
+
+	public Exercise(String name, boolean isCustomExercise, Integer userId, Set<String> targetedMuscles) {
+		super();
+		this.name = name;
+		this.isCustomExercise = isCustomExercise;
+		this.userId = userId;
+		this.targetedMuscles = targetedMuscles;
+	}
+
+	
+
 	
 
 	@Override
@@ -117,9 +128,6 @@ public class Exercise {
 	public void setTargetedMuscles(Set<String> targetedMuscles) {
 		this.targetedMuscles = targetedMuscles;
 	}
-
-	
-	
 	
 	
 }
