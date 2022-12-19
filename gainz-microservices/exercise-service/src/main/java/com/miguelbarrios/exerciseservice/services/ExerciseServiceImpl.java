@@ -56,10 +56,6 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 	@Override
 	public List<Exercise> getExercisesCreatedbyUser(int userId) {
-		Exercise a = Exercise.builder()
-				.name("Bench Press")
-				.isCustomExercise(true)
-				.userId(1).build();
 	
 		
 		return null;
