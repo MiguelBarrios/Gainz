@@ -2,6 +2,7 @@ package com.miguelbarrios.exerciseservice.services;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
@@ -71,14 +72,36 @@ class ExerciseServiceTests {
 		
 		MuscleGroup a = new MuscleGroup("Chest");
 		MuscleGroup b = new MuscleGroup("Shoulders");
+		exercise.addMuscleGroup(a);
+		exercise.addMuscleGroup(b);
 		
 		
 		Exercise managedExercise = exerciseService.createExercise(exercise);
 		
-		assertNotNull(exercise);
+		assertNotNull(managedExercise);
 		assertTrue(managedExercise.getId() > 0);
 		assertTrue(managedExercise.getName().equals("Bench Press"));
+		assertEquals(2, managedExercise.getTargetedMuscles().size());
 		
+	}
+	
+	@Test
+	void should_create_custom_exercise() {
+		Exercise exercise = Exercise.builder()
+				.name("Kettle bell fly's").build();
+		
+		MuscleGroup a = new MuscleGroup("Chest");
+		MuscleGroup b = new MuscleGroup("Abs");
+		
+		Exercise managedExercise = exerciseService.createCustomExercise(exercise, userId);
+		
+		assertNotNull(managedExercise);
+		assertTrue(managedExercise.getId() > 0);
+		assertEquals(userId, managedExercise.getUserId());
+		assertTrue(managedExercise.getName().equals("Kettle bell fly's"));
+		assertTrue(managedExercise.isCustomExercise());
+		assertEquals(2, managedExercise.getTargetedMuscles().size());
+
 	}
 
 	@Test
