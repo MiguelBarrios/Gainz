@@ -1,15 +1,13 @@
 package com.miguelbarrios.exerciseservice.services;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.miguelbarrios.exerciseservice.models.Exercise;
-import com.miguelbarrios.exerciseservice.models.MuscleGroup;
 import com.miguelbarrios.exerciseservice.repositories.ExerciseRepository;
-import com.miguelbarrios.exerciseservice.repositories.MuscleGroupRepository;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -55,51 +53,18 @@ class ExerciseServiceTests {
 	}
 	
 	@Test
-	void exercise_entity_mapping_test() {
-		
-	}
-	
-	@Test
-	void should_create_global_exercise() {
+	void should_get_exercise_by_id() {
+		Set<String> targetedMuscles = new HashSet<>();
 		Exercise exercise = Exercise.builder()
 				.name("Bench Press")
-				.isCustomExercise(false)
 				.build();
-		
-		Exercise managedExercise = exerciseService.createExercise(exercise);
-		
-		assertNotNull(managedExercise);
-		assertTrue(managedExercise.getId() > 0);
-		assertTrue(managedExercise.getName().equals("Bench Press"));
-		assertEquals(2, managedExercise.getTargetedMuscles().size());
+		Exercise expected = exerciseRepository.save(exercise);
+		Exercise actual = exerciseService.getExerciseById(expected.getId());
+		assertNotNull(actual);
+		assertEquals(expected, actual);
 		
 	}
 	
-//	@Test
-//	void should_create_custom_exercise() {
-//		Exercise exercise = Exercise.builder()
-//				.name("Kettle bell fly's").build();
-//		
-//		MuscleGroup a = new MuscleGroup(1,"Back");
-//		MuscleGroup b = new MuscleGroup(2,"Chest");
-//		exercise.addMuscleGroup(a);
-//		exercise.addMuscleGroup(b);
-//		
-//		Exercise managedExercise = exerciseService.createCustomExercise(exercise, userId);
-//		
-//		assertNotNull(managedExercise);
-//		assertTrue(managedExercise.getId() > 0);
-//		assertEquals(userId, managedExercise.getUserId());
-//		assertTrue(managedExercise.getName().equals("Kettle bell fly's"));
-//		assertTrue(managedExercise.isCustomExercise());
-//		assertEquals(2, managedExercise.getTargetedMuscles().size());
-//
-//	}
-
-	@Test
-	void should_return_all_muscle_groups() {		
-		List<MuscleGroup> muscles = exerciseService.getAllMuscleGroups();
-		assertNotNull(muscles.size() >= 4);
-	}
+	
 
 }

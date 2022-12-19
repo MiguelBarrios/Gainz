@@ -1,19 +1,14 @@
 package com.miguelbarrios.exerciseservice.models;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +21,7 @@ public class Exercise {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	
 	private String name;
 	
@@ -37,7 +32,8 @@ public class Exercise {
 	@Column(name="user_id")
 	private Integer userId;
 
-	@Column(name="target_muscle")
+	@Column(name="target_muscles")
+	@ElementCollection(targetClass=String.class)
 	private Set<String> targetedMuscles;
 	
 	
@@ -63,47 +59,63 @@ public class Exercise {
 		return id == other.id;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean isCustomExercise() {
-		return isCustomExercise;
-	}
-
-	public void setCustomExercise(boolean isCustomExercise) {
-		this.isCustomExercise = isCustomExercise;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 
 
 	@Override
 	public String toString() {
 		return "Exercise [id=" + id + ", name=" + name + ", isCustomExercise=" + isCustomExercise + ", userId=" + userId
 				+ ", targetedMuscles=" + targetedMuscles + "]";
+	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public boolean isCustomExercise() {
+		return isCustomExercise;
+	}
+
+
+	public void setCustomExercise(boolean isCustomExercise) {
+		this.isCustomExercise = isCustomExercise;
+	}
+
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+
+	public Set<String> getTargetedMuscles() {
+		return targetedMuscles;
+	}
+
+
+	public void setTargetedMuscles(Set<String> targetedMuscles) {
+		this.targetedMuscles = targetedMuscles;
 	}
 
 	

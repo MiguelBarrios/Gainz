@@ -6,9 +6,7 @@ import java.util.Set;
 import javax.transaction.Transactional;
 
 import com.miguelbarrios.exerciseservice.models.Exercise;
-import com.miguelbarrios.exerciseservice.models.MuscleGroup;
 import com.miguelbarrios.exerciseservice.repositories.ExerciseRepository;
-import com.miguelbarrios.exerciseservice.repositories.MuscleGroupRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +33,7 @@ public class ExerciseServiceImpl implements ExerciseService{
 	}
 
 	@Override
-	public Exercise getExerciseById() {
+	public Exercise getExerciseById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -68,7 +66,9 @@ public class ExerciseServiceImpl implements ExerciseService{
 	public void removeAllCustomExercisesCreatedByUser(int userid) {
 		// TODO Auto-generated method stub
 		
-	} 
+	}
+
+	
 	
 	
 
