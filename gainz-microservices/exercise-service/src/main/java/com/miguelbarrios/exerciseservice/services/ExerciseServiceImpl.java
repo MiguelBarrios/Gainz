@@ -1,10 +1,8 @@
 package com.miguelbarrios.exerciseservice.services;
 
 import java.util.List;
-import java.util.Set;
 
-import javax.transaction.Transactional;
-
+import com.miguelbarrios.exerciseservice.exceptions.ExerciseNotFoundException;
 import com.miguelbarrios.exerciseservice.models.Exercise;
 import com.miguelbarrios.exerciseservice.repositories.ExerciseRepository;
 
@@ -34,8 +32,8 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 	@Override
 	public Exercise getExerciseById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return exerciseRepository.findById(id).orElseThrow(() -> 
+				new ExerciseNotFoundException("exercise with id: " + id + " not found"));
 	}
 
 	@Override

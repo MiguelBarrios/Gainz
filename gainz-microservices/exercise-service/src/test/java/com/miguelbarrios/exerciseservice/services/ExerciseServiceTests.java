@@ -2,10 +2,12 @@ package com.miguelbarrios.exerciseservice.services;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import com.miguelbarrios.exerciseservice.exceptions.ExerciseNotFoundException;
 import com.miguelbarrios.exerciseservice.models.Exercise;
 import com.miguelbarrios.exerciseservice.repositories.ExerciseRepository;
 
@@ -63,6 +65,18 @@ class ExerciseServiceTests {
 		assertNotNull(actual);
 		assertEquals(expected, actual);
 		
+	}
+	
+	@Test
+	void should_throw_exception_for_invalid_id(){
+		try{
+			exerciseService.getExerciseById(999);	
+		}
+		catch(ExerciseNotFoundException e) {
+			return;
+		}
+		
+		fail("Exercise returned with invalid id");
 	}
 	
 	
