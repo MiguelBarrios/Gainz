@@ -20,7 +20,7 @@ public class Exercise {
 
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String name;
@@ -66,16 +66,6 @@ public class Exercise {
 		Exercise other = (Exercise) obj;
 		return id == other.id;
 	}
-
-	
-
-
-	@Override
-	public String toString() {
-		return "Exercise [id=" + id + ", name=" + name + ", isCustomExercise=" + isCustomExercise + ", userId=" + userId
-				+ ", targetedMuscles=" + targetedMuscles + "]";
-	}
-
 
 	public Integer getId() {
 		return id;
@@ -125,6 +115,14 @@ public class Exercise {
 	public void setTargetedMuscles(Set<String> targetedMuscles) {
 		this.targetedMuscles = targetedMuscles;
 	}
+	
+	@Override
+	public String toString() {
+		return "Exercise [id=" + id + ", name=" + name + ", isCustomExercise=" + isCustomExercise + ", userId=" + userId
+				+ ", targetedMuscles=" + targetedMuscles + "]";
+	}
+	
+	
 	
 	
 }
