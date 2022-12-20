@@ -41,7 +41,6 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 	@Override
 	public boolean deleteExercise(int exerciseId, int userId) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -52,13 +51,11 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 	@Override
 	public List<Exercise> getAllCustomExercises() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Exercise> getExercisesCreatedbyUser(int userId) {
-		
 		return exerciseRepository.findAllByUserId(userId);
 	}
 

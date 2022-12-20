@@ -150,6 +150,8 @@ class ExerciseServiceTests {
 	
 	@Test
 	void should_delete_all_user_created_exercises() {
+		exerciseRepository.deleteAll();
+		
 		int userId = 4;
 		List<Exercise> exercises = new ArrayList<>();
 		exercises.add(new Exercise("Bench Press", true, userId, null));
@@ -161,6 +163,26 @@ class ExerciseServiceTests {
 		List<Exercise> userExercises = exerciseRepository.findAllByUserId(userId); 
 		assertNotNull(userExercises);
 		assertEquals(0, userExercises.size());
+	}
+	
+	@Test
+	void should_delete_exercise_by_id() {
+		exerciseRepository.deleteAll();
+		List<Exercise> exercises = new ArrayList<>();
+		exercises.add(new Exercise("Bench Press", true, userId, null));
+		exercises.add(new Exercise("Squat", true, userId, null));
+		exercises.add(new Exercise("DeadLift", true, userId, null));
+		exerciseRepository.saveAllAndFlush(exercises);
+		
+		List<Exercise> userExercises = exerciseRepository.findAllByUserId(userId);
+		int exerciseId = userExercises.get(0).getId();
+		
+		boolean deleted = exerciseService.deleteExercise(exerciseId, userId);
+		assertTrue(deleted);
+		userExercises = exerciseRepository.findAllByUserId(userId);
+		
+		assertEquals(2, userExercises.size());
+
 	}
 	
 	
