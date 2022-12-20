@@ -1,14 +1,17 @@
 package com.miguelbarrios.exerciseservice.models;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,9 +35,12 @@ public class Exercise {
 	@Column(name="user_id")
 	private Integer userId;
 
-	@Column(name="target_muscles")
-	@ElementCollection(targetClass=String.class)
-	private Set<String> targetedMuscles;
+	@ManyToMany
+	@JoinTable(name="exercise_activates_muscle",
+	   joinColumns=@JoinColumn(name="exercise_id"),
+	   inverseJoinColumns=@JoinColumn(name="muscle_name")
+	 )
+	 private List<Muscle> activatedMuscles;
 	
 	
 	public Exercise() {
@@ -46,7 +52,6 @@ public class Exercise {
 		this.name = name;
 		this.isCustomExercise = isCustomExercise;
 		this.userId = userId;
-		this.targetedMuscles = targetedMuscles;
 	}
 
 
@@ -106,21 +111,16 @@ public class Exercise {
 		this.userId = userId;
 	}
 
-
-	public Set<String> getTargetedMuscles() {
-		return targetedMuscles;
+	public List<Muscle> getActivatedMuscles() {
+		return activatedMuscles;
 	}
 
-
-	public void setTargetedMuscles(Set<String> targetedMuscles) {
-		this.targetedMuscles = targetedMuscles;
+	public void setActivatedMuscles(List<Muscle> activatedMuscles) {
+		this.activatedMuscles = activatedMuscles;
 	}
 	
-	@Override
-	public String toString() {
-		return "Exercise [id=" + id + ", name=" + name + ", isCustomExercise=" + isCustomExercise + ", userId=" + userId
-				+ ", targetedMuscles=" + targetedMuscles + "]";
-	}
+	
+	
 	
 	
 	

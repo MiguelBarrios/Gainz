@@ -98,16 +98,12 @@ class ExerciseServiceTests {
 	@Test
 	void should_create_global_exercise() {
 		Exercise e = new Exercise("Bench Press", false, null, null);
-		Set<String> targetedMuscles = new HashSet<>();
-		targetedMuscles.add("Chest");
-		targetedMuscles.add("Shoulders");
-		e.setTargetedMuscles(targetedMuscles);
+
 		
 		Exercise exercise = exerciseService.createExercise(e);
 		assertNotNull(exercise);
 		assertTrue(exercise.getId() > 0);
 		assertEquals("Bench Press", exercise.getName());
-		assertEquals(2, exercise.getTargetedMuscles().size());
 		
 	}
 	
@@ -120,11 +116,9 @@ class ExerciseServiceTests {
 		Exercise exercise = exerciseService.createCustomExercise(e, userId);
 		assertNotNull(exercise);
 		assertNotNull(exercise.getUserId());
-		assertNotNull(exercise.getTargetedMuscles());
 		
 		assertTrue(exercise.getId() > 0);
 		assertEquals("Leg Press", exercise.getName());
-		assertEquals(1, exercise.getTargetedMuscles().size());
 	}
 	
 	@Test
