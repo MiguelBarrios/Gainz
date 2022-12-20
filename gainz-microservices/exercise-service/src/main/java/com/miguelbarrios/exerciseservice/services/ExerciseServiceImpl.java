@@ -2,6 +2,8 @@ package com.miguelbarrios.exerciseservice.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.miguelbarrios.exerciseservice.exceptions.ExerciseNotFoundException;
 import com.miguelbarrios.exerciseservice.models.Exercise;
 import com.miguelbarrios.exerciseservice.repositories.ExerciseRepository;
@@ -61,9 +63,9 @@ public class ExerciseServiceImpl implements ExerciseService{
 	}
 
 	@Override
+	@Transactional
 	public void removeAllCustomExercisesCreatedByUser(int userid) {
-		// TODO Auto-generated method stub
-		
+		exerciseRepository.deleteByUserId(userid);
 	}
 
 	

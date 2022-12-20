@@ -9,5 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ExerciseRepository extends JpaRepository<Exercise, Integer> {
 	
 	List<Exercise> findAllByUserId(int userId);
+	
+	List<Exercise> deleteByUserId(int userId);
 
 }
