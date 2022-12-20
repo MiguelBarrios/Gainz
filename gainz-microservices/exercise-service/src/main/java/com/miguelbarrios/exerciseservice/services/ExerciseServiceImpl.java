@@ -2,69 +2,78 @@ package com.miguelbarrios.exerciseservice.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import com.miguelbarrios.exerciseservice.exceptions.ExerciseNotFoundException;
 import com.miguelbarrios.exerciseservice.models.Exercise;
-import com.miguelbarrios.exerciseservice.models.MuscleGroup;
-import com.miguelbarrios.exerciseservice.repositories.MuscleGroupRepository;
+import com.miguelbarrios.exerciseservice.repositories.ExerciseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class ExerciseServiceImpl implements ExerciseService{
 	
+	@Autowired
+	private ExerciseRepository exerciseRepository;
 	
-	private MuscleGroupRepository muscleRepository;
-	
-	public ExerciseServiceImpl(MuscleGroupRepository muscleRepository) {
-		this.muscleRepository = muscleRepository;
-	}
-	
-	@Override
-	public Exercise createExercise(Exercise exercise, int userId) {
-		return null;
-	}
-	
-
-
-    @Override
-    public boolean deleteExercise() {
-        return false;
-    }
-
-    @Override
-    public List<Exercise> getExercise() {
-        return null;
-    }
-
-    @Override
-    public List<Exercise> getUserExercises(int userId) {
-        return null;
-    }
-
-    @Override
-    public List<MuscleGroup> getTargetedMuscles(Exercise exercise) {
-        return null;
-    }
-
-    @Override
-    public List<Exercise> getAllCustomExercises() {
-        return null;
-    }
 
 	@Override
-	public List<MuscleGroup> getAllMuscleGroups() {
-		return muscleRepository.findAll();
+	public Exercise createExercise(Exercise exercise) {
+		return exerciseRepository.save(exercise);
 	}
-
-
-
-
-
-
 
 	@Override
-	public Exercise getExerciseById() {
-		// TODO Auto-generated method stub
-		return null;
+	public Exercise createCustomExercise(Exercise exercise, int userId) {
+		exercise.setCustomExercise(true);
+		exercise.setUserId(userId);
+		return exerciseRepository.save(exercise);
 	}
+
+	@Override
+	public Exercise getExerciseById(int id) {
+		return exerciseRepository.findById(id).orElseThrow(() -> 
+				new ExerciseNotFoundException("exercise with id: " + id + " not found"));
+	}
+
+	@Override
+	public boolean deleteExercise(int exerciseId, int userId) {
+		Exercise exercise = getExerciseById(exerciseId);
+		if(exercise.getUserId() != userId) {
+			return false;
+		}
+		else {
+			exerciseRepository.deleteById(exerciseId);
+			return true;
+		}
+	}
+
+	@Override
+	public List<Exercise> getExercise() {
+		return exerciseRepository.findAll();
+	}
+
+	@Override
+	public List<Exercise> getAllCustomExercises() {
+		return exerciseRepository.findByIsCustomExercise(true);
+	}
+
+	@Override
+	public List<Exercise> getExercisesCreatedbyUser(int userId) {
+		return exerciseRepository.findAllByUserId(userId);
+	}
+
+	@Override
+	@Transactional
+	public void removeAllCustomExercisesCreatedByUser(int userid) {
+		exerciseRepository.deleteByUserId(userid);
+	}
+
+	
+	
+	
+
 }
