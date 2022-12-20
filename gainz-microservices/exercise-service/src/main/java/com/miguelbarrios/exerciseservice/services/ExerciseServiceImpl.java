@@ -58,7 +58,7 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 	@Override
 	public List<Exercise> getAllCustomExercises() {
-		return null;
+		return exerciseRepository.findByIsCustomExercise(true);
 	}
 
 	@Override

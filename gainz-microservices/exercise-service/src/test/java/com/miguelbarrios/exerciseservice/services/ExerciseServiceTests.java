@@ -198,8 +198,6 @@ class ExerciseServiceTests {
 		List<Exercise> userCreatedExercises =  exerciseService.getAllCustomExercises();
 		assertNotNull(userCreatedExercises);
 		assertEquals(3, userCreatedExercises.size());
-		
-		
 	}
 	
 	

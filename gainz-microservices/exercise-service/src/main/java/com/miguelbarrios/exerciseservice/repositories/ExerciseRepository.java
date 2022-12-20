@@ -11,5 +11,7 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Integer> {
 	List<Exercise> findAllByUserId(int userId);
 	
 	List<Exercise> deleteByUserId(int userId);
+	
+	List<Exercise> findByIsCustomExercise(boolean isCustomExercise);
 
 }
