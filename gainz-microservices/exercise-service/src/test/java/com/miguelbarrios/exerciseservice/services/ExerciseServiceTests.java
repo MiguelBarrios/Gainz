@@ -148,6 +148,21 @@ class ExerciseServiceTests {
 		assertEquals(1, exercise.getTargetedMuscles().size());
 	}
 	
+	@Test
+	void should_delete_all_user_created_exercises() {
+		int userId = 4;
+		List<Exercise> exercises = new ArrayList<>();
+		exercises.add(new Exercise("Bench Press", true, userId, null));
+		exercises.add(new Exercise("Squat", true, userId, null));
+		exercises.add(new Exercise("DeadLift", true, userId, null));
+		exerciseRepository.saveAllAndFlush(exercises);
+		
+		exerciseService.removeAllCustomExercisesCreatedByUser(userId);
+		List<Exercise> userExercises = exerciseRepository.findAllByUserId(userId); 
+		assertNotNull(userExercises);
+		assertEquals(0, userExercises.size());
+	}
+	
 	
 
 }
