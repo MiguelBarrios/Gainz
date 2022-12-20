@@ -57,9 +57,7 @@ public class ExerciseServiceImpl implements ExerciseService{
 	@Override
 	public List<Exercise> getExercisesCreatedbyUser(int userId) {
 		
-		
-		
-		return null;
+		return exerciseRepository.findAllByUserId(userId);
 	}
 
 	@Override
