@@ -185,6 +185,23 @@ class ExerciseServiceTests {
 
 	}
 	
+	@Test
+	void should_get_all_user_created_exercises() {
+		exerciseRepository.deleteAll();
+		List<Exercise> exercises = new ArrayList<>();
+		exercises.add(new Exercise("Bench Press", true, 1, null));
+		exercises.add(new Exercise("Squat", true, 1, null));
+		exercises.add(new Exercise("DeadLift", true, 2, null));
+		exercises.add(new Exercise("DeadLift 2", false, null, null));
+		exerciseRepository.saveAllAndFlush(exercises);
+		
+		List<Exercise> userCreatedExercises =  exerciseService.getAllCustomExercises();
+		assertNotNull(userCreatedExercises);
+		assertEquals(3, userCreatedExercises.size());
+		
+		
+	}
+	
 	
 
 }
