@@ -49,9 +49,6 @@ public class Exercise {
 		this.targetedMuscles = targetedMuscles;
 	}
 
-	
-
-	
 
 	@Override
 	public int hashCode() {

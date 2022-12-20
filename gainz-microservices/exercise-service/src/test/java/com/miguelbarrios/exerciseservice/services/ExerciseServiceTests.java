@@ -145,7 +145,7 @@ class ExerciseServiceTests {
 		
 		assertTrue(exercise.getId() > 0);
 		assertEquals("Leg Press", exercise.getName());
-		assertEquals(2, exercise.getTargetedMuscles().size());
+		assertEquals(1, exercise.getTargetedMuscles().size());
 	}
 	
 	

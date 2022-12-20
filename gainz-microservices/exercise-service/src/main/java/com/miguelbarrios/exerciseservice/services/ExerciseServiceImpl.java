@@ -21,14 +21,14 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 	@Override
 	public Exercise createExercise(Exercise exercise) {
-		// TODO Auto-generated method stub
-		return null;
+		return exerciseRepository.save(exercise);
 	}
 
 	@Override
 	public Exercise createCustomExercise(Exercise exercise, int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		exercise.setCustomExercise(true);
+		exercise.setUserId(userId);
+		return exerciseRepository.save(exercise);
 	}
 
 	@Override
