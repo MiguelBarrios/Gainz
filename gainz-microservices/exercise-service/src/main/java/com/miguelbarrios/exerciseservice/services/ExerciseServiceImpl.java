@@ -41,7 +41,14 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 	@Override
 	public boolean deleteExercise(int exerciseId, int userId) {
-		return false;
+		Exercise exercise = getExerciseById(exerciseId);
+		if(exercise.getUserId() != userId) {
+			return false;
+		}
+		else {
+			exerciseRepository.deleteById(exerciseId);
+			return true;
+		}
 	}
 
 	@Override
